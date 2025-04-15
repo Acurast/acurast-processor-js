@@ -11,6 +11,9 @@
     },
     {
       "path": "./packages/utils"
+    },
+    {
+      "path": "./packages/std-mocks"
     }
   ]
 }
