@@ -1,5 +1,7 @@
 FROM node:22-bookworm-slim
 
+RUN apt update && apt install -y jq
+
 WORKDIR /proj
 
 COPY package.json package-lock.json ./
@@ -10,6 +12,7 @@ COPY packages/utils/package.json packages/utils/package.json
 RUN npm ci
 
 COPY . .
+RUN chmod +x publish-packages.sh
 
 ENV NODE_ENV=production
 
