@@ -5,7 +5,7 @@ include:
 stages:
   - build
   - test
-  # - publish
+  - publish
 
 build:
   stage: build
@@ -20,3 +20,30 @@ test:
     - docker run --name unit-$CI_COMMIT_SHA $GOOGLE_TAG
   after_script:
     - docker rm -f unit-$CI_COMMIT_SHA || true
+
+.publish-base:
+  stage: publish
+  when: manual
+  before_script:
+    - docker rm -f publish-$CI_COMMIT_SHA || true
+  script:
+    - docker run --env NPM_AUTH_TOKEN --name publish-$CI_COMMIT_SHA $GOOGLE_TAG ./publish-packages.sh $FLAGS
+  after_script:
+    - docker rm -f publish-$CI_COMMIT_SHA || true
+
+publish:
+  extends: .publish-base
+  only:
+    - main
+  variables:
+    FLAGS: ""
+
+publish:beta:
+  extends: .publish-base
+  variables:
+    FLAGS: "--beta"
+
+publish:beta:dry-run:
+  extends: .publish-base
+  variables:
+    FLAGS: "--beta --dry-run"
