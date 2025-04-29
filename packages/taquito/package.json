@@ -1,6 +1,6 @@
 {
   "name": "@acurast-processor/taquito",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -19,6 +19,10 @@
     "!**/*.tsbuildinfo"
   ],
   "dependencies": {
+    "@stablelib/blake2b": "^1.0.1",
+    "@taquito/core": "^21.0.4",
+    "@taquito/taquito": "^21.0.4",
+    "@taquito/utils": "^21.0.4",
     "tslib": "^2.3.0"
   }
 }
