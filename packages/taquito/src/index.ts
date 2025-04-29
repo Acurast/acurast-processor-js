@@ -1,1 +1,1 @@
-export * from './lib/taquito.js';
+export * from './lib/signer.js';
